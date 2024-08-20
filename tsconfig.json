@@ -1,0 +1,41 @@
+{
+  "ts-node": {
+    // Do not forget to `yarn add -D tsconfig-paths`
+    "require": ["tsconfig-paths/register"]
+  },
+  "compilerOptions": {
+    "lib": ["es5", "es6", "dom"],
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "rootDir": "./",
+    "baseUrl": "./",
+    "paths": {
+      "@controller/*": ["src/controllers/*"],
+      "@service/*": ["src/services/*"],
+      "@constant/*": ["src/constants/*"],
+      "@repository/*": ["src/repositories/*"],
+      "@entity/*": ["src/entities/*"],
+      "@route/*": ["src/routes/*"],
+      "@interface/*": ["src/interfaces/*"],
+      "@utility/*": ["src/utilities/*"],
+      "@model/*": ["src/models/*"]
+    },
+    /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
+    "outDir": "./dist",
+    /* Allow 'import x from y' when a module doesn't have a default export. */
+    "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
+    // "preserveSymlinks": true,                         /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+
+    /* Type Checking */
+    "strict": true /* Enable all strict type-checking options. */,
+    /* Skip type checking .d.ts files that are included with TypeScript. */
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+  },
+
+  "exclude": ["node_modules"]
+}
