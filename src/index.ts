@@ -25,11 +25,11 @@ app.use((req, res, next) => {
   }
 });
 
-app.get("/hello-word", function (_: any, res: any) {
+app.get("/api/hello-word", function (_: any, res: any) {
   res.send("Hello World");
 });
 
-app.get("/", function (_: any, res: any) {
+app.get("/api", function (_: any, res: any) {
   res.send("OKE");
 });
 
