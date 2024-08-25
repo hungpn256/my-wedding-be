@@ -1,0 +1,49 @@
+version: '3'
+services:
+  # Service cho ứng dụng Node.js
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=posgree
+      - POSTGRES_PASSWORD=posgree
+      - POSTGRES_DB=my-wedding-db
+    depends_on:
+      - db
+
+  app-prod:
+    build: 
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "3000:3000"
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=posgree
+      - POSTGRES_PASSWORD=posgree
+      - POSTGRES_DB=my-wedding-db
+    depends_on:
+      - db
+
+  # Service cho PostgreSQL
+  db:
+    image: postgres:15
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: posgree
+      POSTGRES_PASSWORD: posgree
+      POSTGRES_DB: wedding-db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+# Volumes để lưu trữ dữ liệu của PostgreSQL
+volumes:
+  postgres_data:
