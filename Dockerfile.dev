@@ -1,5 +1,5 @@
 # Sử dụng Node.js image chính thức
-FROM node:18
+FROM node:18-alpine3.20
 
 # Thiết lập thư mục làm việc cho ứng dụng
 WORKDIR /app
@@ -16,7 +16,6 @@ COPY . .
 # Expose cổng mà ứng dụng sẽ chạy
 EXPOSE 3333
 
-RUN apt-get update -y && apt-get install -y openssl
 RUN npx prisma generate
 
 # Chạy lệnh để khởi động ứng dụng

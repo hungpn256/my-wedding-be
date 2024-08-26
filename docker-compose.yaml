@@ -21,7 +21,7 @@ services:
     command: sh -c "npm run migration:deploy && npm run dev"
   # Service cho PostgreSQL
   db:
-    image: postgres:15
+    image: postgres:15-alpine
     restart: always
     ports:
       - "5432:5432"
