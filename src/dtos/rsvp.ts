@@ -1,4 +1,4 @@
-import { IsDate, IsEmail, IsNumber, IsString } from 'class-validator';
+import { IsEmail, IsNumber, IsString } from 'class-validator';
 
 export class RSVP {
   @IsEmail()
@@ -7,8 +7,8 @@ export class RSVP {
   @IsString()
   content: string;
 
-  @IsDate()
-  createdAt: string;
+  @IsString()
+  name: string;
 }
 
 export class ListRSVP {

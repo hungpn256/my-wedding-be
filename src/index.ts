@@ -1,13 +1,14 @@
 import { PrismaClient } from '@prisma/client';
+import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
 import route from './routes';
-
 export const prisma = new PrismaClient();
 const app = express();
 
 app.use(morgan('combined'));
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   const origin = req.get('origin');
@@ -21,13 +22,14 @@ app.use((req, res, next) => {
   );
 
   if (req.method === 'OPTIONS') {
-    res.sendStatus(204);
+    const optionStatus = 204;
+    res.sendStatus(optionStatus);
   } else {
     next();
   }
 });
 
-app.get('/api/', route);
+app.use('/api/', route);
 
 const corsOption = {
   // origin: [process.env.FRONTEND_BASE_URL],  TODO: open comment after have a FE
@@ -37,11 +39,12 @@ const corsOption = {
 };
 
 app.use(cors(corsOption));
-const port = 3000;
+const port = 3333;
 
 const connect = async () => {
   await prisma.$connect();
   app.listen(port, async () => {
+    // eslint-disable-next-line no-console
     console.log(`Example app listening on port ${port}`);
   });
 };

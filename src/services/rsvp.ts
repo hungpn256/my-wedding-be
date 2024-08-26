@@ -12,9 +12,5 @@ export const getRSVP = (page: number, limit: number) => {
 };
 
 export const createRSVP = (data: RSVP) => {
-  return prisma.rSVP.findMany({
-    orderBy: {
-      createdAt: 'desc',
-    },
-  });
+  return prisma.rSVP.create({ data });
 };

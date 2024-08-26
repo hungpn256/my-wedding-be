@@ -1,3 +1,4 @@
+import { StatusCode } from '@constant/statusCode';
 import { createRSVP, getRSVP } from '@service/rsvp';
 import { Request, Response } from 'express';
 import { ListRSVP, RSVP } from 'src/dtos/rsvp';
@@ -5,15 +6,17 @@ import { validator } from 'src/utils/validator';
 
 export const getRSVPController = async (req: Request, res: Response) => {
   try {
-    const body = req.body;
-    const { page, limit } = await validator<ListRSVP>(body, ListRSVP);
+    const query = req.query;
+    const page = parseInt(query.page as string);
+    const limit = parseInt(query.limit as string);
+    await validator<ListRSVP>({ page, limit }, ListRSVP);
     const dataRSVP = await getRSVP(page, limit);
     res.json({
       rsvp: dataRSVP,
     });
-  } catch (error: any) {
-    res.status(400).json({
-      message: error.message,
+  } catch (error: unknown) {
+    res.status(StatusCode.BadRequest).json({
+      message: error,
     });
   }
 };
@@ -26,9 +29,9 @@ export const createRSVPController = async (req: Request, res: Response) => {
     res.json({
       rsvp: dataRSVP,
     });
-  } catch (error: any) {
-    res.status(400).json({
-      message: error.message,
+  } catch (error: unknown) {
+    res.status(StatusCode.BadRequest).json({
+      message: error,
     });
   }
 };

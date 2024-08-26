@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Expose cổng mà ứng dụng sẽ chạy
-EXPOSE 5000
+EXPOSE 3333
 
 RUN apt-get update -y && apt-get install -y openssl
 RUN npx prisma generate

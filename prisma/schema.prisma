@@ -15,8 +15,8 @@ datasource db {
 }
 
 model RSVP {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime? @default(now())
   content   String?
   email     String?
   name      String?

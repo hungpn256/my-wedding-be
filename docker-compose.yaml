@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     ports:
-      - "5000:5000"
+      - "3333:3333"
     environment:
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
@@ -29,10 +29,3 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: my-wedding-db
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-# Volumes để lưu trữ dữ liệu của PostgreSQL
-volumes:
-  postgres_data:
-    driver: local
