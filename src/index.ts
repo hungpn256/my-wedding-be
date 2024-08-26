@@ -1,8 +1,12 @@
+import { PrismaClient } from '@prisma/client';
 import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
 import route from './routes';
+
+export const prisma = new PrismaClient();
 const app = express();
+
 app.use(morgan('combined'));
 
 app.use((req, res, next) => {
@@ -34,6 +38,12 @@ const corsOption = {
 
 app.use(cors(corsOption));
 const port = 3000;
-app.listen(port, async () => {
-  console.log(`Example app listening on port ${port}`);
-});
+
+const connect = async () => {
+  await prisma.$connect();
+  app.listen(port, async () => {
+    console.log(`Example app listening on port ${port}`);
+  });
+};
+
+connect();
