@@ -29,6 +29,5 @@ jobs:
               git pull &&
               yarn && 
               yarn build &&
-              cd dist && 
-              pm2 start src/index
+              pm2 restart index
               '
