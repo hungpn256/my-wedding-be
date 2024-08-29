@@ -1,8 +1,9 @@
-import { IsEmail, IsNumber, IsString } from 'class-validator';
+import { IsEmail, IsNumber, IsString, ValidateIf } from 'class-validator';
 
 export class RSVP {
   @IsEmail()
-  email: string;
+  @ValidateIf((object, value) => value !== null)
+  email: string | null;
 
   @IsString()
   content: string;
