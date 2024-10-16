@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import orderSongRoute from './order-song';
 import routeRSVP from './rsvp';
 import searchRoute from './search';
 
@@ -8,5 +9,6 @@ route.get('/', (req, res) => {
 });
 route.use('/', routeRSVP);
 route.use('/', searchRoute);
+route.use('/', orderSongRoute);
 
 export default route;

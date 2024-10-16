@@ -32,8 +32,7 @@ app.use((req, res, next) => {
 app.use('/api/', route);
 
 const corsOption = {
-  // origin: [process.env.FRONTEND_BASE_URL],  TODO: open comment after have a FE
-  origin: '*',
+  origin: ['hungpn256.click', 'localhost:5173'],
   methods: 'GET,POST,HEAD,OPTIONS,PUT,PATCH,DELETE',
   credentials: true,
 };

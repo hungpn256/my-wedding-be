@@ -20,4 +20,16 @@ model RSVP {
   content   String?
   email     String?
   name      String?
+  isAproved Boolean?  @default(false)
+}
+
+model OrderSong {
+  id         Int       @id @default(autoincrement())
+  createdAt  DateTime? @default(now())
+  content    String?
+  email      String?
+  name       String?
+  youtubeUrl String?
+  isAproved  Boolean?  @default(false)
+  forGroom   Boolean?
 }
