@@ -87,7 +87,6 @@ orderSongRoute.post('/order-song', async (req, res) => {
       <p>Hi Admin,</p>
       <p>You have a new song order with the following details:</p>
       <p><strong>Name:</strong> ${body.name}</p>
-      <p><strong>Email:</strong> ${body.email}</p>
       <p><strong>YouTube URL:</strong> <a href="${body.youtubeUrl}" target="_blank">${body.youtubeUrl}</a></p>
       <iframe
         className="border border-5 border-white w-100"
