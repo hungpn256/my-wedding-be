@@ -82,7 +82,7 @@ export const createRSVPController = async (req: Request, res: Response) => {
             margin: 20px auto;
             padding: 10px 0;
             background-color: #007BFF;
-            color: white;
+            color: white !important;
             text-align: center;
             text-decoration: none;
             border-radius: 4px;
@@ -110,7 +110,7 @@ export const createRSVPController = async (req: Request, res: Response) => {
             <p><strong>Email:</strong>  ${rsvp.email}</p>
             <p><strong>Message:</strong></p>
             <p>${rsvp.content}</p>
-            <a href="https://hungpn256.click/verify-rsvp?id=${dataRSVP.id}" class="button">View All Wishes</a>
+            <a href="https://hungpn256.click/verify-rsvp?id=${dataRSVP.id}" class="button">Accept</a>
           </div>
           <div class="footer">
             <p>&copy; 2024 Your Wishes Platform. All rights reserved.</p>
