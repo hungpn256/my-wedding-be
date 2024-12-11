@@ -1,20 +1,20 @@
+/* eslint-disable no-magic-numbers */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { OrderSong } from '@entity/OrderSong.entity';
 import { sendEmail } from '@service/send-email.service';
 import { Router } from 'express';
-import { prisma } from 'src';
 
 const orderSongRoute = Router();
 
 orderSongRoute.post('/order-song', async (req, res) => {
   try {
     const body = req.body;
-    await prisma.orderSong.create({
-      data: {
-        email: body.email,
-        content: body.content,
-        name: body.name,
-        youtubeUrl: body.youtubeUrl,
-        forGroom: body.forGroom,
-      },
+    await OrderSong.create({
+      email: body.email,
+      content: body.content,
+      name: body.name,
+      youtubeUrl: body.youtubeUrl,
+      forGroom: body.forGroom,
     });
     await sendEmail({
       to: body.forGroom ? 'phamnanghung.25@gmail.com' : 'dothithuha140@gmail.com',

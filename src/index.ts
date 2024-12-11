@@ -1,10 +1,9 @@
-import { PrismaClient } from '@prisma/client';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
+import mongoose from 'mongoose';
 import morgan from 'morgan';
 import route from './routes';
-export const prisma = new PrismaClient();
 const app = express();
 
 app.use(morgan('combined'));
@@ -41,7 +40,9 @@ app.use(cors(corsOption));
 const port = 3333;
 
 const connect = async () => {
-  await prisma.$connect();
+  await mongoose.connect(
+    'mongodb+srv://phamnanghung25:EtMYIuOcOSDDjvcR@my-wedding.qjxmh.mongodb.net/?retryWrites=true&w=majority&appName=my-wedding',
+  );
   app.listen(port, async () => {
     // eslint-disable-next-line no-console
     console.log(`Example app listening on port ${port}`);

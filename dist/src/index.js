@@ -12,12 +12,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.prisma = void 0;
+const client_1 = require("@prisma/client");
+const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const routes_1 = __importDefault(require("./routes"));
+exports.prisma = new client_1.PrismaClient();
 const app = (0, express_1.default)();
 app.use((0, morgan_1.default)('combined'));
+app.use(body_parser_1.default.json());
 app.use((req, res, next) => {
     const origin = req.get('origin');
     res.header('Access-Control-Expose-Headers', 'total-record');
@@ -26,21 +31,26 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'GET,POST,HEAD,OPTIONS,PUT,PATCH,DELETE');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma, Access-Control-Request-Method, Access-Control-Allow-Headers, Access-Control-Request-Headers');
     if (req.method === 'OPTIONS') {
-        res.sendStatus(204);
+        const optionStatus = 204;
+        res.sendStatus(optionStatus);
     }
     else {
         next();
     }
 });
-app.get('/api/', routes_1.default);
+app.use('/api/', routes_1.default);
 const corsOption = {
-    // origin: [process.env.FRONTEND_BASE_URL],  TODO: open comment after have a FE
-    origin: '*',
+    origin: ['hungpn256.click', 'localhost:5173'],
     methods: 'GET,POST,HEAD,OPTIONS,PUT,PATCH,DELETE',
     credentials: true,
 };
 app.use((0, cors_1.default)(corsOption));
-const port = 3000;
-app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(`Example app listening on port ${port}`);
-}));
+const port = 3333;
+const connect = () => __awaiter(void 0, void 0, void 0, function* () {
+    yield exports.prisma.$connect();
+    app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
+        // eslint-disable-next-line no-console
+        console.log(`Example app listening on port ${port}`);
+    }));
+});
+connect();
